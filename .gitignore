@@ -1,0 +1,6 @@
+# sound files
+*.ogg
+*.mp3
+
+# server connection files
+*.php
