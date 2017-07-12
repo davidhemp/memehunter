@@ -12,7 +12,8 @@ var levelData = [
     enmsAvoid: 'troll',
     enmsAvoidText: 'You mad Bro?',
     goodBullet: 'like',
-    background: 'fbBackground'
+    background: 'fbBackground',
+    backgroundColor: '#ffffff'
     },
     { title: "Drama alert!",
       pages: 100,
@@ -21,7 +22,20 @@ var levelData = [
       enemybullets: ['police','potato','sodag','melon',
                     'bullet'],
     background: 'twitchBackground',
+    backgroundColor: '#6441A4',
     enmsAvoid: 'kappa',
     enmsAvoidText: 'kappa123'
+},
+    { title: "cera, every damn time",
+      pages: 100,
+      enms: ['temp', 'list'],
+      enemybullets: ['downvote','downvote','downvote',
+                    'downvote','downvote','downvote',
+                    'downvote','downvote','downvote',
+                    'downvote'],
+    background: 'imgurBackground',
+    backgroundColor: '#2b2b2b',
+    enmsAvoid: 'cera',
+    enmsAvoidText: 'Check the user name!'
     }
 ]

@@ -1,9 +1,11 @@
 var playState = {
     create: function(){
         // Stage setting
-        game.stage.backgroundColor = '#6441A4';
-        background = game.add.sprite(GAME_WIDTH/2, GAME_HEIGHT/2, levelData[level].background);
-        background.anchor.setTo(0.5, 0.5);
+        game.stage.backgroundColor = levelData[level].backgroundColor;
+        background = game.add.sprite(game.world.centerX,
+                                    game.world.centerY,
+                                    levelData[level].background);
+        background.anchor.setTo(0.5);
         // Player set up
         player = game.add.sprite(50, 500, 'desk');
         player.anchor.setTo(0.5, 1);
@@ -59,7 +61,7 @@ var playState = {
     update: function(){
         // enemy spawn
         if (game.time.now > enemySpawnTime){
-            enemy = enemies.getFirstExists(false);
+            enemy = this.getRandomDead(enemies);
             if (enemy){
                 height = game.rnd.integerInRange(100, 700)
                 enemy.reset(1200, height);
@@ -69,7 +71,7 @@ var playState = {
         }
         // enemy fire
         if (game.time.now > enemyFireTime){
-            enemy = this.getRandomSprite(enemies);
+            enemy = this.getRandomAlive(enemies);
             if (enemy){
                 if (enemy.alive && enemy.key != levelData[level].enmsAvoid){
                     enemyBullet = enemy.bullets.getFirstExists(false);
@@ -159,7 +161,7 @@ var playState = {
         }
         // game.state.start(game.state.current);
     },
-    getRandomSprite: function(group) {
+    getRandomAlive: function(group) {
         var randomSprite = null, cnt = 0;
         group.forEachAlive(function(sprite) {
             if (sprite.visible && sprite.inCamera) {
@@ -170,6 +172,15 @@ var playState = {
             }
         });
         return randomSprite;
+    },
+    getRandomDead: function(group){
+        var run = true;
+        while (run){
+            var randomSprite = group.getRandom();
+            if (randomSprite.alive == false){
+                run = false;
+            }
+        }
+    return randomSprite;
     }
-
 };

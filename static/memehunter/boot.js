@@ -1,6 +1,9 @@
 var bootState = {
+    preload: function(){
+        game.load.image('loadinganimation', '/static/memehunter/assets/loading.gif');
+        game.load.image('loadingbar', '/static/memehunter/assets/bar.png');
+    },
     create: function() {
-        game.debug.text('booting', 20, 20, {font: '30px', fill :'#ffffff'});
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.state.start('load');
     }

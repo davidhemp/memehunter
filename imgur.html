@@ -1,0 +1,46 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+var frontPageSettings = {
+    "crossDomain": true,
+    "url": "https://api.imgur.com/3/gallery/hot/viral/0.json",
+    "headers": { "authorization": "Client-ID 00595d523609a70" }
+}
+
+imgurImages = [];
+
+function addToImgurList(imageInfo){
+    if (imageInfo['size'] < 200*1024){
+        imgurImages.push(imageInfo['link']);
+    }
+}
+
+$.get(frontPageSettings, function (response) {
+    var i = 0;
+    while (imgurImages.length < 10 && i < 59){
+        if (response['data'][i]['is_album'] == true){
+            var imageInfoSettings = {
+                "crossDomain": true,
+                "url": "https://api.imgur.com/3/image/" + response['data'][i]['cover'],
+                "headers": {
+                    "authorization": "Client-ID 00595d523609a70"
+                }
+            }
+            $.get(imageInfoSettings, function(response){addToImgurList(response['data']);});
+        } else {
+            addToImgurList(response['data'][i]);
+        }
+        i += 1;
+    }
+    // while (imgurImages.length < 10){
+    // }
+});
+$(document).ajaxStop(function(){
+    console.log(imgurImages);
+});
+</script>
+
+</head>
+</html>

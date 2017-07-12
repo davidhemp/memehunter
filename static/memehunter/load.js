@@ -1,8 +1,23 @@
 var loadState = {
     preload: function(){
+        // loadingAnimation = game.add.sprite(game.world.centerX, game.world.centerY, "loadinganimation");
+        // loadingAnimation.anchor.setTo(0.5);
+        loadingBar = game.add.sprite(game.world.centerX, game.world.centerY, "loadingbar");
+        loadingBar.anchor.setTo(0.5);
+        game.load.setPreloadSprite(loadingBar);
+
+        game.load.crossOrigin = 'anonymous';
+        // imgur level
+        for (var i=0; i < 10; i++){
+            game.load.image(imgurImages[i], imgurURLS[i]);
+        }
+        game.load.image('cera', '/static/memehunter/assets/imgur/cera.png');
+
+        game.load.image('downvote', '/static/memehunter/assets/imgur/downvote.png');
+        game.load.image('imgurBackground', '/static/memehunter/assets/imgur/background.png');
         // Facebook level
         // load images
-        game.load.image('desk', '/static/memehunter/assets/fb/desk.png');
+        game.load.image('desk', '/static/memehunter/assets/desk.png');
         game.load.image('bullet', '/static/memehunter/assets/fb/pointer.png');
         game.load.image('political1', '/static/memehunter/assets/fb/political1.jpg');
         game.load.image('political2', '/static/memehunter/assets/fb/political2.jpg');
@@ -14,6 +29,7 @@ var loadState = {
         game.load.image('clickbait2', '/static/memehunter/assets/fb/clickbait2.png');
         game.load.image('clickbait3', '/static/memehunter/assets/fb/clickbait3.png');
         game.load.image('troll', '/static/memehunter/assets/fb/troll.png');
+
         game.load.image('grumpy', '/static/memehunter/assets/fb/grumpy.png');
         game.load.image('hands', '/static/memehunter/assets/fb/hands.png');
         game.load.image('wow', '/static/memehunter/assets/fb/wow.png');
@@ -36,19 +52,25 @@ var loadState = {
         game.load.image('twitchBackground', '/static/memehunter/assets/twitch/twitchlogo.png');
         // menu
         //load images
+        game.load.image('logo', '/static/memehunter/assets/logo.png')
         game.load.image('forest', '/static/memehunter/assets/forest.jpg');
         //load music
-        game.load.audio('rickRollD', ['/static/memehunter/assets/audio/RickRollD.ogg',
-                                        '/static/memehunter/assets/audio/RickRollD.mp3']);
+        game.load.audio('rickRollD', '/static/memehunter/assets/audio/RickRollD.ogg');
+        game.load.audio('darude', '/static/memehunter/assets/audio/darude.ogg');
+        game.load.audio('normiesong', '/static/memehunter/assets/audio/normiesong.ogg');
+        game.load.audio('numberone', '/static/memehunter/assets/audio/numberone.ogg');
     },
     create: function(){
         game.debug.text('content loaded', 20, 20, {font: '30px', fill :'#fff000'});
         game.state.start('menu');
     }
 }
+
 var Enemy = function(game, enmName, level, enmBullet) {
     Phaser.Sprite.call(this, game, GAME_WIDTH, GAME_HEIGHT, enmName);
     this.anchor.setTo(0.5, 0.5);
+    this.height = 250;
+    this.width = 250;
     this.outOfBoundsKill = true;
     this.checkWorldBounds = true;
     game.physics.enable(this, Phaser.Physics.ARCADE);

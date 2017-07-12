@@ -2,37 +2,31 @@ var menuState = {
     create: function() {
     game.stage.backgroundColor = '#4488AA';
     background = game.add.sprite(0, 0, 'forest');
-    title = game.add.text(GAME_WIDTH/2,200, "Memehunter", {font:"65px", align:"center"});
+    title = game.add.sprite(game.world.centerX, game.world.centerY-200, 'logo');
     title.anchor.setTo(0.5, 0.5);
-    title.font = 'Arial Black';
-    title.fontWeight = 'bold';
 
-    //	Stroke color and thickness
-    title.stroke = '#000000';
-    title.strokeThickness = 10;
-    title.fill = '#ffffff';
-
-    newGameLabel = game.add.text(GAME_WIDTH/2,300, "New Game");
+    newGameLabel = game.add.text(game.world.centerX,300+100, "New Game");
     this.menuItem(newGameLabel, this.newGameMenu);
 
-    level1Label = game.add.text(GAME_WIDTH/2,300, "Facebook");
+    level1Label = game.add.text(game.world.centerX,300+100, "Facebook");
     this.menuItem(level1Label, this.fbLevel);
 
-    level4Label = game.add.text(GAME_WIDTH/2,450, "Twitch", {fill: '#aaaaaa'});
+    level4Label = game.add.text(game.world.centerX,450+100, "Twitch", {fill: '#aaaaaa'});
     this.menuItem(level4Label, this.twitchLevel);
-    level2Label = game.add.text(GAME_WIDTH/2,350, "Imgur", {fill: '#aaaaaa'});
+    level2Label = game.add.text(game.world.centerX,350+100, "Imgur", {fill: '#aaaaaa'});
+    this.menuItem(level2Label, this.imgurLevel);
     level2Label.anchor.setTo(0.5, 0.5);
-    level3Label = game.add.text(GAME_WIDTH/2,400, "Youtube", {fill: '#aaaaaa'});
+    level3Label = game.add.text(game.world.centerX,400+100, "Youtube", {fill: '#aaaaaa'});
     level3Label.anchor.setTo(0.5, 0.5);
 
-    backLabel = game.add.text(GAME_WIDTH/2,500, "Back");
+    backLabel = game.add.text(game.world.centerX,500+100, "Back");
     this.menuItem(backLabel, this.mainMenu);
 
     menuLabels =[newGameLabel, level1Label, level2Label, level3Label, level4Label, backLabel];
     this.mainMenu();
 
     music = game.add.audio('rickRollD');
-    // music.play();
+    music.play();
     },
 
     menuItem: function(item, clickEvent) {
@@ -65,10 +59,29 @@ var menuState = {
     },
     fbLevel: function(item){
         level = 0;
+        music.stop();
+        music = game.add.audio('normiesong');
+        music.play();
         game.state.start("play");
     },
     twitchLevel: function(item){
         level = 1;
+        music.stop();
+        music = game.add.audio('darude');
+        music.play();
         game.state.start("play");
+    },
+    imgurLevel: function(item){
+        level = 2;
+        music.stop();
+        if (imgurImages.length >= 10){
+            levelData[level].enms = imgurImages.splice(0, 10);
+            music = game.add.audio('numberone');
+            music.play();
+            game.state.start("play");
+        } else {
+            console.log("Imgur level still loading");
+            console.log(imgurImages.length);
+        }
     }
 }
