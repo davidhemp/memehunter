@@ -46,10 +46,18 @@ var playState = {
         enemies.shuffle();
         enemies.callAll('kill');
         enemyBullets = game.add.group();
+        if (settings.difficulty){
+            enemySpawnDelta = 1000;
+            enemyFireDelta = 2000;
+        } else {
+            enemySpawnDelta = 2000;
+            enemyFireDelta = 3000;
+        }
         //UI setup
         score = 0;
-        liveLabel = game.add.text(50,50, "Lives: " + lives);
-        scoreLabel = game.add.text(50,100, "pages: " + score);
+        style = {fill: "#ffffff"};
+        liveLabel = game.add.text(50,50, "Lives: " + lives, style);
+        scoreLabel = game.add.text(50,100, "pages: " + score, style);
         warningLabel = game.add.text(400, 50, levelData[level].enmsAvoidText,
                                     {fill: "#ff0000", align: "center"});
         warningLabel.alpha = 0;
@@ -66,7 +74,7 @@ var playState = {
                 height = game.rnd.integerInRange(100, 700)
                 enemy.reset(1200, height);
                 enemy.body.velocity.x = -200;
-                enemySpawnTime = game.time.now + 1000;
+                enemySpawnTime = game.time.now + enemySpawnDelta;
             }
         }
         // enemy fire
@@ -79,7 +87,7 @@ var playState = {
                         enemyBullet.reset(enemy.x-200, enemy.y);
                         enemyBullet.body.velocity.x = -1000;
                         enemyBullets.add(enemyBullet);
-                        enemyFireTime = game.time.now + 2000;
+                        enemyFireTime = game.time.now + enemyFireDelta;
                     }
                 }
             }
@@ -157,7 +165,16 @@ var playState = {
             enemies.shuffle();
         } else {
             player.kill();
-            game.add.text(600, 400, "Game Over!");
+            var go_style = {fill:"#ff0000", aligh:'center'};
+            var gameOverLabel = game.add.text(game.wold.centerX, game.world.centerY, "Game Over!", go_style);
+            gameOverLabel.anchor.setTo(0.5);
+            var newGameLabel = game.add.text(game.wold.centerX, game.world.centerY, "Click to return to main menu", go_style);
+            newGameLabel.inputEnabled = true;
+            newGameLabel.anchor.setTo(0.5);
+            newGameLabel.events.onInputDown.add(function(){
+                game.state.start('menu');
+            }, this);
+
         }
         // game.state.start(game.state.current);
     },

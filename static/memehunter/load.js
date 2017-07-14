@@ -17,8 +17,6 @@ var loadState = {
         game.load.image('imgurBackground', '/static/memehunter/assets/imgur/background.png');
         // Facebook level
         // load images
-        game.load.image('desk', '/static/memehunter/assets/desk.png');
-        game.load.image('bullet', '/static/memehunter/assets/fb/pointer.png');
         game.load.image('political1', '/static/memehunter/assets/fb/political1.jpg');
         game.load.image('political2', '/static/memehunter/assets/fb/political2.jpg');
         game.load.image('political3', '/static/memehunter/assets/fb/political3.jpg');
@@ -40,15 +38,25 @@ var loadState = {
         // Twitch level
         // load images
         game.load.image('ice', '/static/memehunter/assets/twitch/ice.jpg');
-        game.load.image('lirik', '/static/memehunter/assets/twitch/lirik.png');
-        game.load.image('soda', '/static/memehunter/assets/twitch/soda.jpg');
-        game.load.image('potato', '/static/memehunter/assets/twitch/potato.png');
         game.load.image('police', '/static/memehunter/assets/twitch/police.png');
+        game.load.image('lirik', '/static/memehunter/assets/twitch/lirik.png');
+        game.load.image('potato', '/static/memehunter/assets/twitch/potato.png');
+        game.load.image('soda', '/static/memehunter/assets/twitch/soda.jpg');
         game.load.image('sodag', '/static/memehunter/assets/twitch/sodag.png');
-        game.load.image('girlstreamer', '/static/memehunter/assets/twitch/girlstreamer.jpg');
+        game.load.image('girlstreamer1', '/static/memehunter/assets/twitch/girlstreamer1.jpg');
         game.load.image('melon', '/static/memehunter/assets/twitch/melon.png');
+        game.load.image('girlstreamer2', '/static/memehunter/assets/twitch/girlstreamer2.jpg');
+        game.load.image('hey', '/static/memehunter/assets/twitch/hey.png');
+        game.load.image('girlstreamer3', '/static/memehunter/assets/twitch/girlstreamer3.png');
+        game.load.image('smorc', '/static/memehunter/assets/twitch/smorc.png');
+        game.load.image('boaty', '/static/memehunter/assets/twitch/boaty.png');
+        game.load.image('give', '/static/memehunter/assets/twitch/give.png');
+        game.load.image('reckful', '/static/memehunter/assets/twitch/reckful.png');
+        game.load.image('drama', '/static/memehunter/assets/twitch/drama.jpg');
+        game.load.image('glitch', '/static/memehunter/assets/twitch/glitch.png');
         game.load.image('kappa', '/static/memehunter/assets/twitch/kappa.png');
 
+        game.load.image('glitch', '/static/memehunter/assets/twitch/glitch.png');
         game.load.image('twitchBackground', '/static/memehunter/assets/twitch/twitchlogo.png');
         // menu
         //load images
@@ -59,6 +67,9 @@ var loadState = {
         game.load.audio('darude', '/static/memehunter/assets/audio/darude.ogg');
         game.load.audio('normiesong', '/static/memehunter/assets/audio/normiesong.ogg');
         game.load.audio('numberone', '/static/memehunter/assets/audio/numberone.ogg');
+        //player assets
+        game.load.image('desk', '/static/memehunter/assets/desk.png');
+        game.load.image('bullet', '/static/memehunter/assets/pointer.png');
     },
     create: function(){
         game.debug.text('content loaded', 20, 20, {font: '30px', fill :'#fff000'});
