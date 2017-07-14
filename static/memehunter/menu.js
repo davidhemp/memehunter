@@ -1,41 +1,39 @@
 var menuState = {
     create: function() {
-    game.stage.backgroundColor = '#4488AA';
+    game.stage.backgroundColor = '#000000';
     background = game.add.sprite(0, 0, 'forest');
-    title = game.add.sprite(game.world.centerX, game.world.centerY-200, 'logo');
+    title = game.add.sprite(game.world.centerX, game.world.centerY-200, 'logo', style);
     title.anchor.setTo(0.5);
 
     // main view
-    newGameLabel = game.add.text(game.world.centerX, 400, "New Game");
+    newGameLabel = game.add.text(game.world.centerX, 400, "New Game", style);
     this.menuItem(newGameLabel, this.newGameMenu);
-    settingsLabel = game.add.text(game.world.centerX, 450, "Settings");
+    highscoresLabel = game.add.text(game.world.centerX, 450, "High Scores", style);
+    this.menuItem(highscoresLabel, this.highscoresList);
+    settingsLabel = game.add.text(game.world.centerX, 500, "Settings", style);
     this.menuItem(settingsLabel, this.settingsMenu);
 
     // settings view
-    difficultyLabel = game.add.text(game.world.centerX-50, 400, "Difficulty: ");
-    difficultyLevelLabel = game.add.text(game.world.centerX+50, 400, "placeholder");
     if (settings.difficulty){
-        difficultyLevelLabel.text = "Hard";
+        difficultyLabel = game.add.text(game.world.centerX, 400, "Difficulty: Hard", style);
     } else {
-        difficultyLevelLabel.text = "Easy";
+        difficultyLabel = game.add.text(game.world.centerX, 400, "Difficulty: Easy", style);
     }
     this.menuItem(difficultyLabel, this.difficultyToggle);
-    this.menuItem(difficultyLevelLabel, this.difficultyToggle);
-
     //new game view
-    level1Label = game.add.text(game.world.centerX,400, "Facebook");
+    level1Label = game.add.text(game.world.centerX,400, "Facebook", style);
     this.menuItem(level1Label, this.fbLevel);
-    level2Label = game.add.text(game.world.centerX,450, "Imgur");
+    level2Label = game.add.text(game.world.centerX,450, "Imgur", style);
     this.menuItem(level2Label, this.imgurLevel);
-    level3Label = game.add.text(game.world.centerX,500, "Twitch");
+    level3Label = game.add.text(game.world.centerX,500, "Twitch", style);
     this.menuItem(level3Label, this.twitchLevel);
 
     // back on all views
-    backLabel = game.add.text(game.world.centerX,500+100, "Back");
+    backLabel = game.add.text(game.world.centerX, 600, "Back", style);
     this.menuItem(backLabel, this.mainMenu);
 
-    menuLabels =[newGameLabel, settingsLabel,
-                difficultyLabel, difficultyLevelLabel,
+    menuLabels =[newGameLabel, highscoresLabel, settingsLabel,
+                difficultyLabel,
                 level1Label, level2Label, level3Label,
                  backLabel];
     this.mainMenu();
@@ -45,9 +43,9 @@ var menuState = {
     },
 
     menuItem: function(item, clickEvent) {
-        item.fill = '#ffffff';
+        item.fill = '#FF6347';
         item.inputEnabled = true;
-        item.anchor.setTo(0.5, 0.5);
+        item.anchor.setTo(0.5);
         item.events.onInputDown.add(clickEvent, this);
         item.events.onInputOut.add(this.mouseOut, this);
         item.events.onInputOver.add(this.mouseOver, this);
@@ -56,7 +54,7 @@ var menuState = {
         item.fill = '#ff00ff';
     },
     mouseOut: function(item){
-        item.fill = '#ffffff';
+        item.fill = '#FF6347';
     },
     // main view
     mainMenu: function(){
@@ -65,6 +63,8 @@ var menuState = {
         }
         newGameLabel.visible = true;
         settingsLabel.visible = true;
+        highscoresLabel.visible = true;
+        backLabel.y = 600;
     },
     // settings view
     settingsMenu: function(){
@@ -72,15 +72,17 @@ var menuState = {
             menuLabels[i].visible = false;
         }
         difficultyLabel.visible = true;
-        difficultyLevelLabel.visible = true;
         backLabel.visible = true;
+    },
+    highscoresList: function(){
+        game.state.start('highscores');
     },
     difficultyToggle: function(){
         settings.difficulty = !settings.difficulty;
         if (settings.difficulty){
-            difficultyLevelLabel.text = "Hard";
+            difficultyLabel.text = "Difficulty: Hard";
         } else {
-            difficultyLevelLabel.text = "Easy";
+            difficultyLabel.text = "Difficulty: Easy";
         }
         console.log(settings.difficulty);
     },
