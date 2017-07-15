@@ -71,7 +71,7 @@ var playState = {
         //timers and flags
     },
     update: function(){
-        if (game.time.now > this.time + this.timedelta){
+        if (game.time.now > (this.time + this.timedelta)){
             this.time = (game.time.now - this.startTime)/1000;
             timeLabel.text = "Time: " + this.time;
         }
@@ -204,8 +204,8 @@ var playState = {
     gameOver: function(text){
         var gameOverLabel = game.add.text(game.world.centerX, game.world.centerY, text, style);
         gameOverLabel.anchor.setTo(0.5);
-        var input = game.add.inputField(game.world.centerX-50, game.world.centerY+50, style);
-        this.input.width=100
+        nameInput = game.add.inputField(game.world.centerX-75, game.world.centerY+50, style);
+        nameInput.width=100;
         var newGameLabel = game.add.text(game.world.centerX, game.world.centerY+150, "Click to return to main menu", style);
         newGameLabel.inputEnabled = true;
         newGameLabel.anchor.setTo(0.5);
@@ -217,10 +217,15 @@ var playState = {
     sendScore: function(){
         if (this.input.text != "default"){
             console.log("Sending score");
-            var intdiff = settings.difficulty? 1:0;
-            $.post( "highscoreadd.php",
-                {name:this.input.text, score:this.score, time:this.time, difficulty: intdiff},
-                function() { console.log( "success" ); })
+            console.log(nameInput);
+            if (settings.difficulty){
+                var intdiff = 1;
+            } else {
+                var intdiff = 0;
+            }
+            $.post( "http://hempston.co.uk/static/memehunter/highscoreadd.php",
+                {"name":nameInput.value, "pages":this.score, "time":this.time, "difficulty": intdiff},
+                function(response) { console.log(response); })
               .done(function() { console.log( "second success" ); })
               .fail(function() { console.log( "error" ); })
               .always(function() { console.log( "finished" ); });

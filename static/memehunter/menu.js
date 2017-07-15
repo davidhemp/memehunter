@@ -37,9 +37,8 @@ var menuState = {
                 level1Label, level2Label, level3Label,
                  backLabel];
     this.mainMenu();
-
     music = game.add.audio('rickRollD');
-    // music.play();
+    music.play();
     },
 
     menuItem: function(item, clickEvent) {
@@ -75,6 +74,7 @@ var menuState = {
         backLabel.visible = true;
     },
     highscoresList: function(){
+        music.stop();
         game.state.start('highscores');
     },
     difficultyToggle: function(){
@@ -100,14 +100,14 @@ var menuState = {
         level = 0;
         music.stop();
         music = game.add.audio('normiesong');
-        // music.play();
+        music.play();
         game.state.start("play");
     },
     twitchLevel: function(item){
         level = 1;
         music.stop();
         music = game.add.audio('darude');
-        // music.play();
+        music.play();
         game.state.start("play");
     },
     imgurLevel: function(item){
@@ -117,7 +117,7 @@ var menuState = {
             levelData[level].enms = imgurImages.splice(0, 10);
             levelData[level].enms.push('cera');
             music = game.add.audio('numberone');
-            // music.play();
+            music.play();
             game.state.start("play");
         } else {
             console.log("Imgur level still loading");

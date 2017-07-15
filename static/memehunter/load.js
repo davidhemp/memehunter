@@ -80,8 +80,9 @@ var loadState = {
 var Enemy = function(game, enmName, level, enmBullet) {
     Phaser.Sprite.call(this, game, GAME_WIDTH, GAME_HEIGHT, enmName);
     this.anchor.setTo(0.5, 0.5);
+    var ratio = 250/this.height
     this.height = 250;
-    this.width = 250;
+    this.width = this.width*ratio;
     this.outOfBoundsKill = true;
     this.checkWorldBounds = true;
     game.physics.enable(this, Phaser.Physics.ARCADE);
