@@ -37,6 +37,7 @@ var menuState = {
                 level1Label, level2Label, level3Label,
                  backLabel];
     this.mainMenu();
+    music = null;
     music = game.add.audio('rickRollD');
     music.play();
     },

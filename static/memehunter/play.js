@@ -212,10 +212,10 @@ var playState = {
         newGameLabel.events.onInputDown.add(this.sendScore, this);
         newGameLabel.events.onInputOut.add(function(){newGameLabel.fill = '#FF6347';}, this);
         newGameLabel.events.onInputOver.add(function(){newGameLabel.fill = '#ff00ff'}, this);
-
     },
     sendScore: function(){
-        if (this.input.text != "default"){
+        music.stop();
+        if (nameInput.value != ""){
             console.log("Sending score");
             console.log(nameInput);
             if (settings.difficulty){
